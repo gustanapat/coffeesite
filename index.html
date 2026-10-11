@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanapat Ca'fe</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./images/coffee-cup.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // ปรับแต่ง Custom Color Palette ตามภาพสีที่แนบมา
+                        pinkTheme: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f687b3',
+                            400: '#e11d48',
+                            500: '#d90429', // Vibrant Magenta / Hot Pink
+                            600: '#b0005a', // Darker Magenta
+                            700: '#8b0042',
+                            800: '#1e2528', // Dark Charcoal/Slate Gray from palette
+                            900: '#121618', // Very Dark Charcoal background
+                        },
+                        darkBg: '#181c1f',
+                        darkCard: '#22272b',
+                        accentPink: '#c2185b', // Magenta / Dark Pink accent
+                        brightPink: '#e91e63', // Neon Pink hover/badge
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg text-slate-100 font-sans antialiased selection:bg-pinkTheme-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-pinkTheme-900/90 backdrop-blur-md border-b border-pinkTheme-800 shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="./images/coffee-cup.png" alt="" class="w-10 h-10 ">
+                <!-- <div class="w-10 h-10 rounded-full bg-pinkTheme-500 flex items-center justify-center text-white shadow-lg shadow-pinkTheme-500/30 group-hover:bg-pinkTheme-600 transition-colors">
+                    <i class="fa-solid fa-mug-hot text-lg"></i>
+                </div> -->
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg sm:text-xl tracking-tight text-white leading-tight">Tanapat Ca'fe</span>
+                    <span class="text-xs text-pinkTheme-300 font-medium tracking-widest uppercase">Coffee & Pink Vibes</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-300 text-sm">
+                <a href="#home" class="hover:text-pinkTheme-300 transition-colors">หน้าแรก</a>
+                <a href="#about" class="hover:text-pinkTheme-300 transition-colors">เกี่ยวกับเรา</a>
+                <a href="#menu" class="hover:text-pinkTheme-300 transition-colors">เมนูแนะนำ</a>
+                <a href="#features" class="hover:text-pinkTheme-300 transition-colors">จุดเด่นของเรา</a>
+                <a href="#gallery" class="hover:text-pinkTheme-300 transition-colors">บรรยากาศร้าน</a>
+                <a href="#contact" class="hover:text-pinkTheme-300 transition-colors">ติดต่อเรา</a>
+            </nav>
+
+            <!-- Call to Action & Mobile Button -->
+            <div class="flex items-center gap-4">
+                <a href="#menu" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-pinkTheme-500 hover:bg-pinkTheme-600 text-white text-sm font-medium shadow-lg shadow-pinkTheme-500/30 transition-all duration-200 hover:shadow-pinkTheme-500/50">
+                    <span>ดูเมนูเครื่องดื่ม</span>
+                    <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden p-2 rounded-lg text-white hover:bg-pinkTheme-800 transition-colors focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-pinkTheme-900 border-b border-pinkTheme-800 shadow-xl px-6 py-6 transition-all duration-300">
+            <nav class="flex flex-col space-y-4 font-medium text-slate-200">
+                <a href="#home" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">หน้าแรก</a>
+                <a href="#about" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">เกี่ยวกับเรา</a>
+                <a href="#menu" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">เมนูแนะนำ</a>
+                <a href="#features" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">จุดเด่นของเรา</a>
+                <a href="#gallery" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">บรรยากาศร้าน</a>
+                <a href="#contact" class="mobile-link hover:text-pinkTheme-300 transition-colors py-1">ติดต่อเรา</a>
+                <div class="pt-2">
+                    <a href="#menu" class="mobile-link inline-block w-full text-center px-5 py-3 rounded-xl bg-pinkTheme-500 text-white font-medium shadow-lg">
+                        ดูเมนูเครื่องดื่ม
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <!-- Hero Section -->
+        <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-b from-pinkTheme-900 via-darkBg to-darkBg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Hero Content -->
+                    <div class="space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pinkTheme-800/80 border border-pinkTheme-600/40 text-pinkTheme-200 text-xs sm:text-sm font-semibold tracking-wide">
+                            <i class="fa-solid fa-sparkles text-pinkTheme-400"></i>
+                            <span>ยินดีต้อนรับสู่ Tanapat Ca'fe</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]">
+                            เติมพลังความสุข <br class="hidden sm:inline">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pinkTheme-300 via-brightPink to-pinkTheme-500">ในทุกแก้วโปรดคุณ</span>
+                        </h1>
+                        <p class="text-base sm:text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                            ร้านกาแฟขนาดเล็กสไตล์ชิค คัดสรรเมล็ดกาแฟคุณภาพเยี่ยม พร้อมเสิร์ฟความอร่อยจากชา โกโก้ และเครื่องดื่มสูตรพิเศษในบรรยากาศโทนชมพูสุดชิค
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-pinkTheme-500 hover:bg-pinkTheme-600 text-white font-semibold shadow-lg shadow-pinkTheme-500/30 hover:shadow-pinkTheme-500/50 transition-all duration-200 text-center">
+                                ดูเมนูเครื่องดื่ม
+                            </a>
+                            <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-pinkTheme-600/60 hover:border-pinkTheme-400 text-slate-200 hover:text-white font-semibold transition-all duration-200 text-center bg-pinkTheme-900/30">
+                                ทำความรู้จักเรา
+                            </a>
+                        </div>
+                        
+                        <!-- Mini Stats -->
+                        <div class="grid grid-cols-3 gap-4 pt-8 border-t border-pinkTheme-800 max-w-md mx-auto lg:mx-0">
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-white">100%</p>
+                                <p class="text-xs text-pinkTheme-300 mt-0.5">เมล็ดคัดพิเศษ</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-white">30+</p>
+                                <p class="text-xs text-pinkTheme-300 mt-0.5">เมนูเครื่องดื่ม</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-white">4.9</p>
+                                <p class="text-xs text-pinkTheme-300 mt-0.5">ความประทับใจ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="relative flex justify-center">
+                        <div class="relative w-full max-w-md lg:max-w-lg aspect-square">
+                            <div class="absolute inset-0 bg-pinkTheme-500/20 rounded-full blur-3xl transform scale-90"></div>
+                            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" 
+                                 alt="บรรยากาศร้านกาแฟ Tanapat Ca'fe และแก้วกาแฟสด" 
+                                 class="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl border-2 border-pinkTheme-600/30"
+                                 onerror="this.src='https://placehold.co/600x600/8b0042/ffffff?text=DTI+SAU+WOW+COFFEE'">
+                            
+                            <!-- Floating Badge Card -->
+                            <div class="absolute bottom-6 left-6 z-20 bg-darkCard/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl border border-pinkTheme-600/40 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-pinkTheme-500/20 flex items-center justify-center text-brightPink">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-medium text-pinkTheme-300">เมนูยอดนิยม</p>
+                                    <p class="text-sm font-bold text-white">Signature Pink Wow Latte</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 md:py-28 bg-darkBg border-t border-pinkTheme-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- About Images Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80" 
+                                 alt="บาริสต้ากำลังชงกาแฟดริป" 
+                                 class="w-full h-48 sm:h-64 object-cover rounded-2xl shadow-md border border-pinkTheme-800"
+                                 onerror="this.src='https://placehold.co/400x400/8b0042/ffffff?text=Coffee+Brewing'">
+                            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=500&q=80" 
+                                 alt="เมล็ดกาแฟคั่วหอมกรุ่น" 
+                                 class="w-full h-36 sm:h-48 object-cover rounded-2xl shadow-md border border-pinkTheme-800"
+                                 onerror="this.src='https://placehold.co/400x300/8b0042/ffffff?text=Coffee+Beans'">
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=500&q=80" 
+                                 alt="มุมนั่งเล่นในร้านกาแฟ" 
+                                 class="w-full h-36 sm:h-48 object-cover rounded-2xl shadow-md border border-pinkTheme-800"
+                                 onerror="this.src='https://placehold.co/400x300/8b0042/ffffff?text=Cafe+Corner'">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80" 
+                                 alt="แก้วกาแฟลาเต้อาร์ตสวยงาม" 
+                                 class="w-full h-48 sm:h-64 object-cover rounded-2xl shadow-md border border-pinkTheme-800"
+                                 onerror="this.src='https://placehold.co/400x400/8b0042/ffffff?text=Latte+Art'">
+                        </div>
+                    </div>
+
+                    <!-- About Text Content -->
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkTheme-800/80 border border-pinkTheme-600/40 text-pinkTheme-300 text-xs font-semibold uppercase tracking-wider">
+                            <span>เกี่ยวกับเรา</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                            เรื่องราวความสุขและเอกลักษณ์ <br>ที่ <span class="text-transparent bg-clip-text bg-gradient-to-r from-pinkTheme-300 to-brightPink">Tanapat Ca'fe</span>
+                        </h2>
+                        <p class="text-slate-300 leading-relaxed text-base">
+                            เราเป็นร้านกาแฟขนาดเล็กที่ตั้งใจรังสรรค์พื้นที่แห่งความอบอุ่นผสมผสานความโมเดิร์น ด้วยความหลงใหลในกลิ่นอายของกาแฟคั่วบดสดใหม่ และความใส่ใจในทุกรายละเอียดตั้งแต่การคัดเลือกเมล็ดพันธุ์คุณภาพดี ชานมรสชาติเข้มข้น โกโก้ละมุน ลิ้มลองได้ในบรรยากาศโทนสีชมพูสุดโดดเด่น
+                        </p>
+                        <p class="text-slate-300 leading-relaxed text-base">
+                            ไม่ว่าคุณจะแวะมาเพื่อเติมพลังในยามเช้า ถ่ายรูปมุมชิค ๆ กับเพื่อนฝูง หรือหาที่นั่งทำงานสบาย ๆ เราพร้อมต้อนรับด้วยรอยยิ้มและมิตรภาพ
+                        </p>
+                        
+                        <!-- Check list highlights -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-pinkTheme-500 text-white flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-200">เมล็ดกาแฟคั่วสดใหม่</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-pinkTheme-500 text-white flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-200">วัตถุดิบพรีเมียมสะอาดปลอดภัย</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-pinkTheme-500 text-white flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-200">ชงด้วยความใส่ใจทุกแก้ว</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-pinkTheme-500 text-white flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-200">มุมถ่ายรูปสไตล์ Pink Modern</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Menu Section -->
+        <section id="menu" class="py-20 md:py-28 bg-pinkTheme-900/40 border-t border-pinkTheme-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <span class="px-3.5 py-1.5 rounded-full bg-pinkTheme-800 border border-pinkTheme-600/40 text-pinkTheme-300 text-xs font-semibold uppercase tracking-wider">
+                        เมนูแนะนำ
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                        เครื่องดื่มยอดนิยมที่คุณต้องลอง
+                    </h2>
+                    <p class="text-slate-300 text-base">
+                        คัดสรรความอร่อยลงตัวในแต่ละหมวดหมู่ ทั้งกาแฟสด ชาหอม ๆ โกโก้เข้มข้น และเครื่องดื่มสีชมพูสุดชิค
+                    </p>
+                </div>
+
+                <!-- Menu Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Menu Item 1 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Signature Pink Wow Latte" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Signature+Pink+Latte'">
+                            <span class="absolute top-4 right-4 bg-pinkTheme-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                Signature
+                            </span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Signature Pink Wow Latte</h3>
+                                    <span class="font-bold text-brightPink text-lg">65.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    กาแฟเอสเพรสโซ่เข้มผสานนมสดแท้สูตรพิ้งค์บีทรูต หอมนุ่ม กลมกล่อมลงตัวไม่เหมือนใคร
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-mug-hot mr-1 text-pinkTheme-400"></i> ร้อน / เย็น / ปั่น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">ยอดนิยม</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 2 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Dark Cocoa Supreme" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Dark+Cocoa'">
+                            <span class="absolute top-4 right-4 bg-pinkTheme-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                Recommended
+                            </span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Dark Cocoa Supreme</h3>
+                                    <span class="font-bold text-brightPink text-lg">60.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    โกโก้นำเข้าเข้มข้นสะใจ สายดาร์กห้ามพลาด หวานน้อยกลมกล่อม หอมมันกำลังดี
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-mug-hot mr-1 text-pinkTheme-400"></i> เย็น / ปั่น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">เข้มข้น</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 3 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Thai Fresh Milk Tea" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Thai+Milk+Tea'">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Thai Fresh Milk Tea</h3>
+                                    <span class="font-bold text-brightPink text-lg">50.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    ชาไทยกลิ่นหอมละมุน ชงด้วยชาคัดพิเศษ รสชาติไทยแท้ดั้งเดิม กลมกล่อมลงตัว
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-mug-hot mr-1 text-pinkTheme-400"></i> เย็น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">ดั้งเดิม</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 4 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Matcha Green Tea Latte" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Matcha+Latte'">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Matcha Green Tea Latte</h3>
+                                    <span class="font-bold text-brightPink text-lg">65.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    ชาเขียวมัทฉะแท้นำเข้าจากญี่ปุ่น กลิ่นหอมเป็นเอกลักษณ์ ผสมนมสดนุ่มนวล
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-mug-hot mr-1 text-pinkTheme-400"></i> ร้อน / เย็น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">พรีเมียม</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 5 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Pink Berry Sparkler" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Pink+Berry'">
+                            <span class="absolute top-4 right-4 bg-pinkTheme-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                Refreshing
+                            </span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Pink Berry Sparkler</h3>
+                                    <span class="font-bold text-brightPink text-lg">60.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    เครื่องดื่มสตรอว์เบอร์รีผสมเลมอนโซดา ให้ความสดชื่นตื่นตัว ตกแต่งด้วยผลเบอร์รีสด
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-glass-water mr-1 text-pinkTheme-400"></i> เย็น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">สดชื่น</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 6 -->
+                    <div class="bg-darkCard rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-pinkTheme-500/10 transition-all duration-300 border border-pinkTheme-800 hover:border-pinkTheme-500 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1485808191679-edf8637cb6a9?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Caramel Macchiato" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Caramel+Macchiato'">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-white group-hover:text-pinkTheme-300 transition-colors">Caramel Macchiato</h3>
+                                    <span class="font-bold text-brightPink text-lg">70.-</span>
+                                </div>
+                                <p class="text-sm text-slate-400 line-clamp-2">
+                                    เอสเพรสโซ่ราดด้วยคาราเมลซอสสูตรเข้มข้นบนฟองนุ่ม ๆ หอมหวานละมุนละไม
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-pinkTheme-800/80 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span><i class="fa-solid fa-mug-hot mr-1 text-pinkTheme-400"></i> ร้อน / เย็น</span>
+                                <span class="bg-pinkTheme-800/80 text-pinkTheme-300 px-2.5 py-1 rounded-md">พรีเมียม</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer Menu Note -->
+                <div class="mt-12 text-center">
+                    <p class="text-sm text-slate-400">
+                        * มีบริการระดับความหวานตามใจชอบ (หวานน้อย 0%, 25%, 50%, 100%) สอบถามบาริสต้าเพิ่มเติมได้เลยครับ
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="features" class="py-20 md:py-28 bg-darkBg border-t border-pinkTheme-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <span class="px-3.5 py-1.5 rounded-full bg-pinkTheme-800 border border-pinkTheme-600/40 text-pinkTheme-300 text-xs font-semibold uppercase tracking-wider">
+                        จุดเด่นของเรา
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                        ทำไมต้องเลือก Tanapat Ca'fe?
+                    </h2>
+                    <p class="text-slate-300 text-base">
+                        เราใส่ใจในทุกขั้นตอน เพื่อส่งมอบประสบการณ์เครื่องดื่มที่ดีที่สุดให้แก่ลูกค้าทุกคน
+                    </p>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Feature 1 -->
+                    <div class="bg-darkCard p-8 rounded-3xl border border-pinkTheme-800 hover:border-pinkTheme-500 transition-all duration-300 text-center space-y-4 group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pinkTheme-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-pinkTheme-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">วัตถุดิบคุณภาพ</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            คัดสรรเมล็ดกาแฟคั่วสดและวัตถุดิบเกรดพรีเมียม มั่นใจได้ในความหอมอร่อยสะอาดปลอดภัย
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-darkCard p-8 rounded-3xl border border-pinkTheme-800 hover:border-pinkTheme-500 transition-all duration-300 text-center space-y-4 group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pinkTheme-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-pinkTheme-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-mug-saucer"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">เครื่องดื่มหลากหลาย</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            มีเมนูตอบโจทย์ทุกไลฟ์สไตล์ ทั้งกาแฟ ชา โกโก้ และเครื่องดื่มสีชมพูสุดชิค
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-darkCard p-8 rounded-3xl border border-pinkTheme-800 hover:border-pinkTheme-500 transition-all duration-300 text-center space-y-4 group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pinkTheme-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-pinkTheme-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">ราคาเข้าถึงได้</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            เครื่องดื่มคุณภาพเยี่ยมในราคามิตรภาพ สบายกระเป๋า ดื่มได้ทุกวันไม่มีเบื่อ
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-darkCard p-8 rounded-3xl border border-pinkTheme-800 hover:border-pinkTheme-500 transition-all duration-300 text-center space-y-4 group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pinkTheme-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-pinkTheme-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">สไตล์ Pink Modern</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            ตกแต่งร้านในสไตล์โมเดิร์นสีชมพูสุดเก๋ มีมุมถ่ายรูปน่ารัก ๆ สำหรับเช็กอิน
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 md:py-28 bg-pinkTheme-900/40 border-t border-pinkTheme-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <span class="px-3.5 py-1.5 rounded-full bg-pinkTheme-800 border border-pinkTheme-600/40 text-pinkTheme-300 text-xs font-semibold uppercase tracking-wider">
+                        แกลเลอรี
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                        บรรยากาศและผลงานของเรา
+                    </h2>
+                    <p class="text-slate-300 text-base">
+                        สัมผัสความอบอุ่นและมุมถ่ายรูปสุดชิคภายในร้าน Tanapat Ca'fe
+                    </p>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80" 
+                             alt="แก้วกาแฟบนโต๊ะไม้" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+1'">
+                    </div>
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" 
+                             alt="บรรยากาศภายในร้านกาแฟ" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+2'">
+                    </div>
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" 
+                             alt="เคาน์เตอร์บาร์ร้านกาแฟ" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+3'">
+                    </div>
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" 
+                             alt="ลูกค้ากำลังดื่มด่ำกับเครื่องดื่ม" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+4'">
+                    </div>
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=600&q=80" 
+                             alt="เครื่องชงกาแฟเอสเพรสโซ่" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+5'">
+                    </div>
+                    <div class="overflow-hidden rounded-3xl shadow-lg border border-pinkTheme-800 group aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1507133754945-2f8319f305f3?auto=format&fit=crop&w=600&q=80" 
+                             alt="เบเกอรี่และเครื่องดื่ม" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x450/8b0042/ffffff?text=Gallery+6'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section & Footer -->
+        <section id="contact" class="py-20 md:py-24 bg-pinkTheme-900 text-white border-t border-pinkTheme-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 pb-16 border-b border-pinkTheme-800">
+                    
+                    <!-- Brand Column -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-pinkTheme-500 flex items-center justify-center text-white shadow-md">
+                                <i class="fa-solid fa-mug-hot text-lg"></i>
+                            </div>
+                            <span class="font-bold text-xl tracking-tight text-white">Tanapat Ca'fe</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed max-w-sm">
+                            ร้านกาแฟสไตล์พิงก์โมเดิร์นสุดอบอุ่น เต็มเปี่ยมด้วยความใส่ใจและรอยยิ้ม พร้อมเสิร์ฟความอร่อยในทุกแก้วเพื่อคุณ
+                        </p>
+                        <div class="flex items-center gap-3 pt-2">
+                            <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full bg-pinkTheme-800 hover:bg-pinkTheme-500 flex items-center justify-center text-white transition-colors">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-pinkTheme-800 hover:bg-pinkTheme-500 flex items-center justify-center text-white transition-colors">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" aria-label="Line" class="w-10 h-10 rounded-full bg-pinkTheme-800 hover:bg-pinkTheme-500 flex items-center justify-center text-white transition-colors">
+                                <i class="fa-brands fa-line"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Location & Hours -->
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-bold text-white">ที่ตั้งและเวลาเปิด–ปิด</h4>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-pinkTheme-400 mt-1 shrink-0"></i>
+                                <span>123/4 ถ.มหาวิทยาลัย ต.ขามใหญ่ อ.เมือง จ.อุบลราชธานี (ข้อมูลตัวอย่าง)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-clock text-pinkTheme-400 shrink-0"></i>
+                                <span>เปิดบริการทุกวัน: 07:00 - 18:00 น.</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-phone text-pinkTheme-400 shrink-0"></i>
+                                <span>089-123-4567</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Quick Navigation -->
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-bold text-white">เมนูด่วน</h4>
+                        <ul class="grid grid-cols-2 gap-2 text-sm text-slate-300">
+                            <li><a href="#home" class="hover:text-pinkTheme-300 transition-colors">หน้าแรก</a></li>
+                            <li><a href="#about" class="hover:text-pinkTheme-300 transition-colors">เกี่ยวกับเรา</a></li>
+                            <li><a href="#menu" class="hover:text-pinkTheme-300 transition-colors">เมนูแนะนำ</a></li>
+                            <li><a href="#features" class="hover:text-pinkTheme-300 transition-colors">จุดเด่นของเรา</a></li>
+                            <li><a href="#gallery" class="hover:text-pinkTheme-300 transition-colors">บรรยากาศร้าน</a></li>
+                            <li><a href="#contact" class="hover:text-pinkTheme-300 transition-colors">ติดต่อเรา</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Copyright Footer -->
+                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                    <p>&copy; 2026 Tanapat Ca'fe. สงวนลิขสิทธิ์ทุกประการ (พื้นที่ตัวอย่างสำหรับประชาสัมพันธ์ร้าน)</p>
+                    <p class="flex items-center gap-1">
+                        Created by <i class="fa-solid fa-heart text-pinkTheme-400 mx-1"></i> Tanapat Sr. 6952D10008
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Toggle mobile navigation menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking any nav link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
